@@ -4,12 +4,12 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.burgers.app.DTO.Request.DeleteIngredientDTO;
+import com.burgers.app.DTO.Request.IngredientDTO;
 import com.burgers.app.Data.IngredientRepository;
 import com.burgers.app.Domain.Ingredient;
 import com.burgers.app.Domain.Ingredient.IngredientType;
 import com.burgers.app.Exception.BurgersException;
-import com.burgers.app.Request.DeleteIngredientRequest;
-import com.burgers.app.Request.IngredientRequest;
 import com.burgers.app.Security.MessageResponse;
 import com.burgers.app.Service.IngredientService;
 import com.burgers.app.Service.MapperService;
@@ -38,7 +38,7 @@ public class IngredientRestController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> add(@Valid @RequestBody IngredientRequest iRequest) {
+    public ResponseEntity<?> add(@Valid @RequestBody IngredientDTO iRequest) {
 
         try {
             Ingredient ingredient = mapperService.toEntity(iRequest);
@@ -51,7 +51,7 @@ public class IngredientRestController {
 
     @PatchMapping("/delete")
     @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> delete(@Valid @RequestBody DeleteIngredientRequest dIngredientRequest) {
+    public ResponseEntity<?> delete(@Valid @RequestBody DeleteIngredientDTO dIngredientRequest) {
 
         try {
             Ingredient ingredient = mapperService.toEntity(dIngredientRequest);

@@ -9,13 +9,13 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import com.burgers.app.DTO.Request.ModifyRoleDTO;
 import com.burgers.app.Data.RoleRepository;
 import com.burgers.app.Data.UserRepository;
 import com.burgers.app.Domain.ERole;
 import com.burgers.app.Domain.Role;
 import com.burgers.app.Domain.User;
 import com.burgers.app.Exception.BurgersException;
-import com.burgers.app.Request.ModifyRoleRequest;
 import com.burgers.app.Security.MessageResponse;
 import com.burgers.app.Service.MapperService;
 import com.burgers.app.Service.UserService;
@@ -51,7 +51,7 @@ public class AdminRestController {
 
     @PostMapping("/addRole")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> addRole(@Valid @RequestBody ModifyRoleRequest mRoleRequest) {
+    public ResponseEntity<?> addRole(@Valid @RequestBody ModifyRoleDTO mRoleRequest) {
 
         try {
             Map<String, Object> map = mapperService.toEntity(mRoleRequest);
@@ -66,7 +66,7 @@ public class AdminRestController {
 
     @PostMapping("/removeRole")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> removeRole(@Valid @RequestBody ModifyRoleRequest mRoleRequest) {
+    public ResponseEntity<?> removeRole(@Valid @RequestBody ModifyRoleDTO mRoleRequest) {
 
         try {
             Map<String, Object> map = mapperService.toEntity(mRoleRequest);

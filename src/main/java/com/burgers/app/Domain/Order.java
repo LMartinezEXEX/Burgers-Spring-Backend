@@ -69,8 +69,11 @@ public class Order  implements Serializable{
     public void addDesign(Burger design){
         design.setBurgerInOrderId(this.nextBurgerId++);
         this.burgers.add(design);
-        
-        this.price += design.getPrice();
+    }
+
+    public void calculatePrice() {
+        for(Burger burger: this.burgers)
+            this.price += burger.getPrice();
     }
 
     public Burger getBurgerByBurgerInOrderId(Long id){

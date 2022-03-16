@@ -9,6 +9,9 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.burgers.app.DTO.Request.BurgerDTO;
+import com.burgers.app.DTO.Request.DeleteBurgerDTO;
+import com.burgers.app.DTO.Request.DeleteBurgerIngredientDTO;
 import com.burgers.app.Data.BurgerRepository;
 import com.burgers.app.Data.BurgerSizeRepository;
 import com.burgers.app.Data.IngredientRepository;
@@ -18,9 +21,6 @@ import com.burgers.app.Domain.Ingredient;
 import com.burgers.app.Domain.Order;
 import com.burgers.app.Domain.Ingredient.IngredientType;
 import com.burgers.app.Exception.BurgersException;
-import com.burgers.app.Request.BurgerRequest;
-import com.burgers.app.Request.RemoveBurgerRequest;
-import com.burgers.app.Request.RemoveIngredientRequest;
 import com.burgers.app.Security.MessageResponse;
 import com.burgers.app.Service.DesignService;
 import com.burgers.app.Service.MapperService;
@@ -49,7 +49,7 @@ public class DesignBurgerRestController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> addBurger(@Valid @RequestBody BurgerRequest bRequest, HttpServletRequest request) {
+    public ResponseEntity<?> addBurger(@Valid @RequestBody BurgerDTO bRequest, HttpServletRequest request) {
         
         Burger burger = mapperService.toEntity(bRequest);
         try {
@@ -61,7 +61,7 @@ public class DesignBurgerRestController {
 
     @PatchMapping("/removeBurger")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> removeBurger(@Valid @RequestBody RemoveBurgerRequest rBurgerRequest, HttpServletRequest request) {
+    public ResponseEntity<?> removeBurger(@Valid @RequestBody DeleteBurgerDTO rBurgerRequest, HttpServletRequest request) {
 
         Burger burger = mapperService.toEntity(rBurgerRequest);
         try {
@@ -73,7 +73,7 @@ public class DesignBurgerRestController {
 
     @PatchMapping("/removeIngredient")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> removeIngredient(@Valid @RequestBody RemoveIngredientRequest rIngredientRequest, HttpServletRequest request) {
+    public ResponseEntity<?> removeIngredient(@Valid @RequestBody DeleteBurgerIngredientDTO rIngredientRequest, HttpServletRequest request) {
 
         try {
             Map<String, Object> map = mapperService.toEntity(rIngredientRequest);

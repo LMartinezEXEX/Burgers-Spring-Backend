@@ -3,10 +3,10 @@ package com.burgers.app.Web.REST;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.burgers.app.DTO.Request.OrderDTO;
 import com.burgers.app.Domain.Order;
 import com.burgers.app.Domain.User;
 import com.burgers.app.Exception.BurgersException;
-import com.burgers.app.Request.OrderRequest;
 import com.burgers.app.Security.MessageResponse;
 import com.burgers.app.Service.MapperService;
 import com.burgers.app.Service.OrderService;
@@ -38,7 +38,7 @@ public class OrderRestController {
 
     @PostMapping("/complete")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> completeOrder(@Valid @RequestBody OrderRequest oRequest, HttpServletRequest request) {
+    public ResponseEntity<?> completeOrder(@Valid @RequestBody OrderDTO oRequest, HttpServletRequest request) {
 
         Order orderData = mapperService.toEntity(oRequest);
         try {

@@ -1,4 +1,4 @@
-package com.burgers.app.Request;
+package com.burgers.app.DTO.Request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class OrderRequest {
+public class OrderDTO {
     @NotBlank
     private String name;
 

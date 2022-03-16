@@ -2,7 +2,8 @@ package com.burgers.app.Web.REST;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.burgers.app.Domain.Coupon;
+import com.burgers.app.DTO.Request.ApplyCouponDTO;
+import com.burgers.app.DTO.Request.CouponDTO;
 import com.burgers.app.Exception.BurgersException;
 import com.burgers.app.Security.MessageResponse;
 import com.burgers.app.Service.CouponService;
@@ -27,10 +28,10 @@ public class CouponRestController {
 
     @PostMapping("/apply")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> applyCoupon(@RequestBody Coupon coupon, HttpServletRequest request) {
+    public ResponseEntity<?> applyCoupon(@RequestBody ApplyCouponDTO couponDTO, HttpServletRequest request) {
 
         try {
-            return ResponseEntity.ok(couponService.apply(coupon.getCode(), request.getSession()));
+            return ResponseEntity.ok(couponService.apply(couponDTO.getCode(), request.getSession()));
         } catch(BurgersException be){
             return ResponseEntity.badRequest().body(be.getMessage());
         }
@@ -54,8 +55,8 @@ public class CouponRestController {
 
     @PostMapping("/generate")
     @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> generate(@RequestBody Coupon coupon){
+    public ResponseEntity<?> generate(@RequestBody CouponDTO couponDTO){
         
-        return ResponseEntity.ok(couponService.generate(coupon.getDiscount(), coupon.getAvailableUntil()));
+        return ResponseEntity.ok(couponService.generate(couponDTO.getDiscount(), couponDTO.getAvailableUntil()));
     }
 }

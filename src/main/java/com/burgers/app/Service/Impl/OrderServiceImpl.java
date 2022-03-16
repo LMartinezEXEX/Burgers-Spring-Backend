@@ -14,7 +14,6 @@ import com.burgers.app.Domain.Order;
 import com.burgers.app.Domain.User;
 import com.burgers.app.Domain.UserDetailsImp;
 import com.burgers.app.Exception.BurgersException;
-import com.burgers.app.Request.OrderRequest;
 import com.burgers.app.Service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +62,8 @@ public class OrderServiceImpl implements OrderService{
                                     orderData.isUsingFreeDelivery()
                                     );
 
+        order.calculatePrice();
+
         Coupon coupon = (Coupon) session.getAttribute("userCoupon");
         if(Objects.nonNull(coupon)) {
             order.apply(coupon);
@@ -88,14 +89,5 @@ public class OrderServiceImpl implements OrderService{
             order.setUser(null);
 
         return orders;
-    }
-
-    @Override
-    public Order requestToEntity(OrderRequest oRequest) {
-
-        Order orderData = new Order(oRequest.getName(), oRequest.getStreet(), oRequest.getCity(), oRequest.getState(), oRequest.getZip());
-        orderData.setUsingFreeDelivery(oRequest.isFreeDelivery());
-        
-        return orderData;
     }
 }

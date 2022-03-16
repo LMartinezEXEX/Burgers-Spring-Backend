@@ -1,4 +1,4 @@
-package com.burgers.app.Request;
+package com.burgers.app.DTO.Request;
 
 import java.util.List;
 
@@ -9,8 +9,7 @@ import javax.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class BurgerRequest {
-    
+public class BurgerDTO {
     @NotBlank
     @Size(min = 3, max = 15)
     private String name;

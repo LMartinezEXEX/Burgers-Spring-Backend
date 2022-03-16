@@ -7,6 +7,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+import com.burgers.app.DTO.Request.BurgerDTO;
+import com.burgers.app.DTO.Request.DeleteBurgerDTO;
+import com.burgers.app.DTO.Request.DeleteBurgerIngredientDTO;
+import com.burgers.app.DTO.Request.DeleteIngredientDTO;
+import com.burgers.app.DTO.Request.IngredientDTO;
+import com.burgers.app.DTO.Request.ModifyRoleDTO;
+import com.burgers.app.DTO.Request.OrderDTO;
 import com.burgers.app.Data.BurgerSizeRepository;
 import com.burgers.app.Data.IngredientRepository;
 import com.burgers.app.Data.RoleRepository;
@@ -20,13 +27,6 @@ import com.burgers.app.Domain.Role;
 import com.burgers.app.Domain.User;
 import com.burgers.app.Domain.Ingredient.IngredientType;
 import com.burgers.app.Exception.BurgersException;
-import com.burgers.app.Request.BurgerRequest;
-import com.burgers.app.Request.DeleteIngredientRequest;
-import com.burgers.app.Request.IngredientRequest;
-import com.burgers.app.Request.ModifyRoleRequest;
-import com.burgers.app.Request.OrderRequest;
-import com.burgers.app.Request.RemoveBurgerRequest;
-import com.burgers.app.Request.RemoveIngredientRequest;
 import com.burgers.app.Service.MapperService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class MapperServiceImpl implements MapperService{
     private RoleRepository roleRepository;
 
     @Override
-    public Burger toEntity(BurgerRequest bRequest) {
+    public Burger toEntity(BurgerDTO bRequest) {
 
         List<Ingredient> ingredients = new ArrayList<>();
 
@@ -69,7 +69,7 @@ public class MapperServiceImpl implements MapperService{
     }
 
     @Override
-    public Burger toEntity(RemoveBurgerRequest rBurgerRequest) {
+    public Burger toEntity(DeleteBurgerDTO rBurgerRequest) {
 
         Burger burger = new Burger();
         burger.setBurgerInOrderId(rBurgerRequest.getBurgerInOrderId());
@@ -78,7 +78,7 @@ public class MapperServiceImpl implements MapperService{
     }
 
     @Override
-    public Ingredient toEntity(IngredientRequest iRequest) throws BurgersException {
+    public Ingredient toEntity(IngredientDTO iRequest) throws BurgersException {
 
         IngredientType type;
         try {
@@ -97,7 +97,7 @@ public class MapperServiceImpl implements MapperService{
     }
 
     @Override
-    public Ingredient toEntity(DeleteIngredientRequest dIngredientRequest) throws BurgersException {
+    public Ingredient toEntity(DeleteIngredientDTO dIngredientRequest) throws BurgersException {
 
         Optional<Ingredient> optIngredient = ingredientRepository.findById(dIngredientRequest.getIngredientId());
         if(optIngredient.isEmpty()) throw new BurgersException("Error: Ingredient not found");
@@ -108,7 +108,7 @@ public class MapperServiceImpl implements MapperService{
     }
 
     @Override
-    public Order toEntity(OrderRequest oRequest) {
+    public Order toEntity(OrderDTO oRequest) {
 
         Order orderData = new Order(oRequest.getName(), oRequest.getStreet(), oRequest.getCity(), oRequest.getState(), oRequest.getZip());
         orderData.setUsingFreeDelivery(oRequest.isFreeDelivery());
@@ -117,7 +117,7 @@ public class MapperServiceImpl implements MapperService{
     }
 
     @Override
-    public Map<String, Object> toEntity(RemoveIngredientRequest rIngredientRequest) throws BurgersException {
+    public Map<String, Object> toEntity(DeleteBurgerIngredientDTO rIngredientRequest) throws BurgersException {
 
         Map<String, Object> map = new HashMap<>();
 
@@ -136,7 +136,7 @@ public class MapperServiceImpl implements MapperService{
     }
 
     @Override
-    public Map<String, Object> toEntity(ModifyRoleRequest mRoleRequest) throws BurgersException {
+    public Map<String, Object> toEntity(ModifyRoleDTO mRoleRequest) throws BurgersException {
 
         Map<String, Object> map = new HashMap<>();
         User user;
