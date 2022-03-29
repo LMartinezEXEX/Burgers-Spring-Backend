@@ -1,5 +1,7 @@
 package com.burgers.app.Web.REST;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -55,7 +57,9 @@ public class OrderRestController {
 
         try {
             User user = userService.getLoggedInUser();
-            return ResponseEntity.ok(orderService.getAllOrdersFromUser(user));
+            List<Order> orders = orderService.getAllOrdersFromUser(user);
+            orders.forEach(order -> mapperService.toDTO(order));
+            return ResponseEntity.ok(orders);
         } catch (BurgersException be) {
             return ResponseEntity.badRequest().body(be.getMessage());
         } 

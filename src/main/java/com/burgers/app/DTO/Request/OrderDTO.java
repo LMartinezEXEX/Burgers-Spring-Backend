@@ -22,6 +22,9 @@ public class OrderDTO {
     @NotBlank
     private String zip;
 
-    @NotNull
+    @NotBlank
+    private String phone;
+
+    @NotNull 
     private boolean freeDelivery;
 }

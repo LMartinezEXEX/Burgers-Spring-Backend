@@ -9,6 +9,7 @@ import com.burgers.app.DTO.Request.DeleteIngredientDTO;
 import com.burgers.app.DTO.Request.IngredientDTO;
 import com.burgers.app.DTO.Request.ModifyRoleDTO;
 import com.burgers.app.DTO.Request.OrderDTO;
+import com.burgers.app.DTO.Response.OrderToDTO;
 import com.burgers.app.Domain.Burger;
 import com.burgers.app.Domain.Ingredient;
 import com.burgers.app.Domain.Order;
@@ -29,4 +30,6 @@ public interface MapperService {
     public Map<String, Object> toEntity(ModifyRoleDTO mRoleRequest) throws BurgersException;
     
     public Map<String, Object> toEntity(DeleteBurgerIngredientDTO rIngredientRequest) throws BurgersException;
+
+    public OrderToDTO toDTO(Order order);
 }

@@ -59,6 +59,7 @@ public class OrderServiceImpl implements OrderService{
                                     orderData.getCity(), 
                                     orderData.getState(), 
                                     orderData.getZip(), 
+                                    orderData.getPhone(),
                                     orderData.isUsingFreeDelivery()
                                     );
 
@@ -85,8 +86,6 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> getAllOrdersFromUser(User user) throws BurgersException {
         
         List<Order> orders = orderRepository.findAllByUser(user);
-        for(Order order : orders) // CHANGE TO SPECIFIC DTO!
-            order.setUser(null);
 
         return orders;
     }

@@ -57,6 +57,9 @@ public class Order  implements Serializable{
     @NotBlank(message = "Zip code is required")
     private String zip;
 
+    @NotBlank
+    private String phone;
+
     @NotNull
     private boolean usingFreeDelivery;
 
@@ -118,21 +121,23 @@ public class Order  implements Serializable{
 
     }
 
-    public Order(String name, String street, String city, String state, String zip) {
+    public Order(String name, String street, String city, String state, String zip, String phone) {
         this.name = name;
         this.street = street;
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.phone = phone;
     }
 
-    public void completeDeliveryData(User user, String name, String street, String city, String state, String zip, boolean usingFreeDelivery) {
+    public void completeDeliveryData(User user, String name, String street, String city, String state, String zip, String phone, boolean usingFreeDelivery) {
         this.setUser(user);
         this.setName(name);
         this.setStreet(street);
         this.setCity(city);
         this.setState(state);
         this.setZip(zip);
+        this.setPhone(phone);
         this.setUsingFreeDelivery(usingFreeDelivery);
 
         if(isUsingFreeDelivery()) this.setPrice(Math.max(0, this.getPrice() - 120L));

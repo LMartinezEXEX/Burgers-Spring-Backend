@@ -6,7 +6,7 @@ insert into roles (name) values ('ROLE_ADMIN');
 
 insert into INGREDIENTS (id, name, price, type, description) values (1000, 'MEAT', 0,'PROTEIN', '');
 insert into INGREDIENTS (id, name, price, type, description) values (1001, 'VEGAN', 0, 'PROTEIN', '');
-insert into INGREDIENTS (id, name, price, type, description) values (1002, 'LENTEJA', 0, 'PROTEIN', '');
+insert into INGREDIENTS (id, name, price, type, description) values (1002, 'LENTIL', 0, 'PROTEIN', '');
 insert into INGREDIENTS (id, name, price, type, description) values (1003, 'CHEDDAR', 20, 'TOPPING', '');
 insert into INGREDIENTS (id, name, price, type, description) values (1004, 'BACON', 20, 'TOPPING', '');
 insert into INGREDIENTS (id, name, price, type, description) values (1005, 'CARAMELIZED ONION', 20, 'TOPPING', '');

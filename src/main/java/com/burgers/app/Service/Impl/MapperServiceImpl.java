@@ -14,6 +14,7 @@ import com.burgers.app.DTO.Request.DeleteIngredientDTO;
 import com.burgers.app.DTO.Request.IngredientDTO;
 import com.burgers.app.DTO.Request.ModifyRoleDTO;
 import com.burgers.app.DTO.Request.OrderDTO;
+import com.burgers.app.DTO.Response.OrderToDTO;
 import com.burgers.app.Data.BurgerSizeRepository;
 import com.burgers.app.Data.IngredientRepository;
 import com.burgers.app.Data.RoleRepository;
@@ -110,7 +111,7 @@ public class MapperServiceImpl implements MapperService{
     @Override
     public Order toEntity(OrderDTO oRequest) {
 
-        Order orderData = new Order(oRequest.getName(), oRequest.getStreet(), oRequest.getCity(), oRequest.getState(), oRequest.getZip());
+        Order orderData = new Order(oRequest.getName(), oRequest.getStreet(), oRequest.getCity(), oRequest.getState(), oRequest.getZip(), oRequest.getPhone());
         orderData.setUsingFreeDelivery(oRequest.isFreeDelivery());
         
         return orderData;
@@ -167,6 +168,12 @@ public class MapperServiceImpl implements MapperService{
         map.put("Role", role);
 
         return map;
+    }
+
+    @Override
+    public OrderToDTO toDTO(Order order) {
+        OrderToDTO  dto = new OrderToDTO(order.getId(), order.getStreet(), order.getCity(), order.getState(), order.getZip(), order.getBurgers());
+        return dto;
     }
     
 }
