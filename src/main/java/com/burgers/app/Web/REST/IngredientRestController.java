@@ -1,16 +1,11 @@
 package com.burgers.app.Web.REST;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import com.burgers.app.DTO.Request.DeleteIngredientDTO;
 import com.burgers.app.DTO.Request.IngredientDTO;
-import com.burgers.app.Data.IngredientRepository;
 import com.burgers.app.Domain.Ingredient;
-import com.burgers.app.Domain.Ingredient.IngredientType;
 import com.burgers.app.Exception.BurgersException;
-import com.burgers.app.Security.MessageResponse;
 import com.burgers.app.Service.IngredientService;
 import com.burgers.app.Service.MapperService;
 
@@ -76,58 +71,4 @@ public class IngredientRestController {
 
         return ResponseEntity.ok(ingredientService.getAllTypes());
     }
-
-    /*
-    @Autowired
-    IngredientRepository ingredientRepository;
-
-    @PostMapping("/add")
-    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> addIngredient(@Valid @RequestBody IngredientRequest ingredientRequest){
-        
-        System.out.println(ingredientRequest.getType());
-        if (ingredientRepository.existsByName(ingredientRequest.getName())){
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Ingredient name already exist!"));
-        }
-
-        IngredientType type;
-
-        try {
-
-            type = IngredientType.valueOf(ingredientRequest.getType());
-
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity
-                        .badRequest()
-                        .body(new MessageResponse("Error: Invalid ingredient type!"));
-        }
-
-        Ingredient ingredientToSave = new Ingredient(ingredientRequest.getName().toUpperCase(),
-                                                        ingredientRequest.getPrice(),
-                                                        ingredientRequest.getDescription(),
-                                                        type);
-                                
-        ingredientRepository.save(ingredientToSave);
-
-        return ResponseEntity.ok(new MessageResponse("Ingreident added successfully!"));
-    }
-
-    @PatchMapping("/delete")
-    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> deleteIngredient(@Valid @RequestBody DeleteIngredientRequest deleteRequest){
-        ingredientRepository.deleteById(deleteRequest.getIngredientId());
-        return ResponseEntity.ok(new MessageResponse("Ingredient deleted Successfull"));
-    }
-
-
-    @RequestMapping("/get")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> getIngredients(){
-        Iterable<Ingredient> ingredients = ingredientRepository.findAll();
-
-        return ResponseEntity.ok(ingredients);
-    } */
-
 }

@@ -31,21 +31,4 @@ public class UserRestController {
             return ResponseEntity.badRequest().body(be.getMessage());
         }
     }
-
-    /*
-    @Autowired
-    private UserRepository userRepository;
-
-    @GetMapping("/deliveryPoints")
-    @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-    public ResponseEntity<?> getDeliveryPoints() {
-        UserDetailsImp userDetails = (UserDetailsImp) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        User user = userRepository.findByUsername(userDetails.getUsername());
-        if (Objects.isNull(user)){
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: User not found!"));
-        }
-
-        return ResponseEntity.ok(user.getDeliveryPoints());
-    }*/
 }
